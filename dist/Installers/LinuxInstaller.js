@@ -112,7 +112,7 @@ class LinuxInstaller {
             yield exec_1.exec('wget ' + download_url + ' -O UnitySetUp');
             yield exec_1.exec('sudo chmod +x UnitySetUp');
             const components = this.GetInstallComponents(option);
-            return exec_1.exec("./UnitySetUp", ["--unattended", '--install-location="/opt/Unity"', `--components=${components.join(",")}`], { input: Buffer.from("y\n", "ascii") });
+            return exec_1.exec("./UnitySetUp", ["--unattended", "--install-location=/opt/Unity", `--components=${components.join(",")}`], { input: Buffer.from("y\n", "ascii") });
         });
     }
     ;
