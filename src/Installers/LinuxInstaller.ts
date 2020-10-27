@@ -96,8 +96,7 @@ export class LinuxInstaller implements Installer {
         return exec("./UnitySetUp", ["--unattended", '--install-location="/opt/Unity"', `--components="${components.join(",")}"`], { input: Buffer.from("y\n", "ascii") });
     };
     private GetInstallComponents(option: InstallOption): string[] {
-        let command = 'echo y | ./UnitySetUp --unattended --install-location="/opt/Unity" --components="Unity';
-        const components = []
+        const components = ["Unity"]
         if (option["has-android"] === 'true') {
             components.push("Android");
         }

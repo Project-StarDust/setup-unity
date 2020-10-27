@@ -117,8 +117,7 @@ class LinuxInstaller {
     }
     ;
     GetInstallComponents(option) {
-        let command = 'echo y | ./UnitySetUp --unattended --install-location="/opt/Unity" --components="Unity';
-        const components = [];
+        const components = ["Unity"];
         if (option["has-android"] === 'true') {
             components.push("Android");
         }
