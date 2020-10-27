@@ -83,17 +83,17 @@ export class LinuxInstaller implements Installer {
             await this.Install(version, option);
         }
     };
-    private async InstallDependencies(): Promise<void> {
-        exec('sudo apt-get update').then(
+    private async InstallDependencies(): Promise<number> {
+        return exec('sudo apt-get update').then(
             _ => exec(`sudo apt-get install -y ${PACKAGES.join(" ")}`)
         )
     };
-    private async Install(version: string, option: InstallOption) {
+    private async Install(version: string, option: InstallOption): Promise<number> {
         const download_url: string = "https://beta.unity3d.com/download/" + GetId(version) + "/UnitySetup";
         await exec('wget ' + download_url + ' -O UnitySetUp');
         await exec('sudo chmod +x UnitySetUp');
         let command = this.CreateInstallCommand(option);
-        cp.execSync(command);
+        return exec(command);
     };
     private CreateInstallCommand(option: InstallOption) {
         let command = 'echo y | ./UnitySetUp --unattended --install-location="/opt/Unity" --components="Unity';

@@ -102,7 +102,7 @@ class LinuxInstaller {
     ;
     InstallDependencies() {
         return __awaiter(this, void 0, void 0, function* () {
-            exec_1.exec('sudo apt-get update').then(_ => exec_1.exec(`sudo apt-get install -y ${PACKAGES.join(" ")}`));
+            return exec_1.exec('sudo apt-get update').then(_ => exec_1.exec(`sudo apt-get install -y ${PACKAGES.join(" ")}`));
         });
     }
     ;
@@ -112,7 +112,7 @@ class LinuxInstaller {
             yield exec_1.exec('wget ' + download_url + ' -O UnitySetUp');
             yield exec_1.exec('sudo chmod +x UnitySetUp');
             let command = this.CreateInstallCommand(option);
-            cp.execSync(command);
+            return exec_1.exec(command);
         });
     }
     ;
