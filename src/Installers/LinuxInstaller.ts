@@ -93,7 +93,7 @@ export class LinuxInstaller implements Installer {
         await exec('wget ' + download_url + ' -O UnitySetUp');
         await exec('sudo chmod +x UnitySetUp');
         const components = this.GetInstallComponents(option);
-        return exec("./UnitySetUp", ["--unattended", '--install-location="/opt/Unity"', `--components="${components.join(",")}"`], { input: Buffer.from("y\n", "ascii") });
+        return exec("./UnitySetUp", ["--unattended", '--install-location="/opt/Unity"', `--components=${components.join(",")}`], { input: Buffer.from("y\n", "ascii") });
     };
     private GetInstallComponents(option: InstallOption): string[] {
         const components = ["Unity"]
