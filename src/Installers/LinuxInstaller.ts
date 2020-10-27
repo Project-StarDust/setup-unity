@@ -9,6 +9,49 @@ import * as fs from 'fs';
 import { info, getInput } from '@actions/core';
 import { GetCacheKeyVersionIndex, GetCacheKeyCount } from './cache_version';
 
+const PACKAGES = [
+    "gconf-service",
+    "lib32gcc1",
+    "lib32stdc++6",
+    "libasound2",
+    "libc6",
+    "libc6-i386",
+    "libcairo2",
+    "libcap2",
+    "libcups2",
+    "libdbus-1-3",
+    "libexpat1",
+    "libfontconfig1",
+    "libfreetype6",
+    "libgcc1",
+    "libgconf-2-4",
+    "libgdk-pixbuf2.0-0",
+    "libgl1-mesa-glx",
+    "libglib2.0-0",
+    "libglu1-mesa",
+    "libgtk2.0-0",
+    "libnspr4",
+    "libnss3",
+    "libpango1.0-0",
+    "libstdc++6",
+    "libx11-6",
+    "libxcomposite1",
+    "libxcursor1",
+    "libxdamage1",
+    "libxext6",
+    "libxfixes3",
+    "libxi6",
+    "libxrandr2",
+    "libxrender1",
+    "libxtst6",
+    "zlib1g",
+    "nodejs-dev",
+    "node-gyp",
+    "libssl1.0-dev",
+    "npm",
+    "debconf",
+];
+
 export class LinuxInstaller implements Installer {
     constructor() {
         this.key = 'll';
@@ -41,47 +84,9 @@ export class LinuxInstaller implements Installer {
         }
     };
     private async InstallDependencies(): Promise<void> {
-        await exec('sudo apt-get update')
-        const packages = [
-            "gconf-service",
-            "lib32gcc1",
-            "lib32stdc++6",
-            "libasound2",
-            "libc6",
-            "libc6-i386",
-            "libcairo2",
-            "libcap2",
-            "libcups2",
-            "libdbus-1-3",
-            "libexpat1",
-            "libfontconfig1",
-            "libfreetype6",
-            "libgcc1",
-            "libgconf-2-4",
-            "libgdk-pixbuf2.0-0",
-            "libgl1-mesa-glx",
-            "libglib2.0-0",
-            "libglu1-mesa",
-            "libgtk2.0-0",
-            "libnspr4",
-            "libnss3",
-            "libpango1.0-0",
-            "libstdc++6",
-            "libx11-6",
-            "libxcomposite1",
-            "libxcursor1",
-            "libxdamage1",
-            "libxext6",
-            "libxfixes3",
-            "libxi6",
-            "libxrandr2",
-            "libxrender1",
-            "libxtst6",
-            "zlib1g",
-            "npm",
-            "debconf",
-        ];
-        await exec(`sudo apt-get install -y ${packages.join(" ")}`);
+        exec('sudo apt-get update').then(
+            _ => exec(`sudo apt-get install -y ${PACKAGES.join(" ")}`)
+        )
     };
     private async Install(version: string, option: InstallOption) {
         const download_url: string = "https://beta.unity3d.com/download/" + GetId(version) + "/UnitySetup";

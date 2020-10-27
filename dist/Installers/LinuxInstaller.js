@@ -25,6 +25,48 @@ const HttpClient_1 = require("typed-rest-client/HttpClient");
 const fs = __importStar(require("fs"));
 const core_1 = require("@actions/core");
 const cache_version_1 = require("./cache_version");
+const PACKAGES = [
+    "gconf-service",
+    "lib32gcc1",
+    "lib32stdc++6",
+    "libasound2",
+    "libc6",
+    "libc6-i386",
+    "libcairo2",
+    "libcap2",
+    "libcups2",
+    "libdbus-1-3",
+    "libexpat1",
+    "libfontconfig1",
+    "libfreetype6",
+    "libgcc1",
+    "libgconf-2-4",
+    "libgdk-pixbuf2.0-0",
+    "libgl1-mesa-glx",
+    "libglib2.0-0",
+    "libglu1-mesa",
+    "libgtk2.0-0",
+    "libnspr4",
+    "libnss3",
+    "libpango1.0-0",
+    "libstdc++6",
+    "libx11-6",
+    "libxcomposite1",
+    "libxcursor1",
+    "libxdamage1",
+    "libxext6",
+    "libxfixes3",
+    "libxi6",
+    "libxrandr2",
+    "libxrender1",
+    "libxtst6",
+    "zlib1g",
+    "nodejs-dev",
+    "node-gyp",
+    "libssl1.0-dev",
+    "npm",
+    "debconf",
+];
 class LinuxInstaller {
     constructor() {
         this.key = 'll';
@@ -60,47 +102,7 @@ class LinuxInstaller {
     ;
     InstallDependencies() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield exec_1.exec('sudo apt-get update');
-            const packages = [
-                "gconf-service",
-                "lib32gcc1",
-                "lib32stdc++6",
-                "libasound2",
-                "libc6",
-                "libc6-i386",
-                "libcairo2",
-                "libcap2",
-                "libcups2",
-                "libdbus-1-3",
-                "libexpat1",
-                "libfontconfig1",
-                "libfreetype6",
-                "libgcc1",
-                "libgconf-2-4",
-                "libgdk-pixbuf2.0-0",
-                "libgl1-mesa-glx",
-                "libglib2.0-0",
-                "libglu1-mesa",
-                "libgtk2.0-0",
-                "libnspr4",
-                "libnss3",
-                "libpango1.0-0",
-                "libstdc++6",
-                "libx11-6",
-                "libxcomposite1",
-                "libxcursor1",
-                "libxdamage1",
-                "libxext6",
-                "libxfixes3",
-                "libxi6",
-                "libxrandr2",
-                "libxrender1",
-                "libxtst6",
-                "zlib1g",
-                "npm",
-                "debconf",
-            ];
-            yield exec_1.exec(`sudo apt-get install -y ${packages.join(" ")}`);
+            exec_1.exec('sudo apt-get update').then(_ => exec_1.exec(`sudo apt-get install -y ${PACKAGES.join(" ")}`));
         });
     }
     ;
