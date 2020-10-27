@@ -111,33 +111,33 @@ class LinuxInstaller {
             const download_url = "https://beta.unity3d.com/download/" + utility_1.GetId(version) + "/UnitySetup";
             yield exec_1.exec('wget ' + download_url + ' -O UnitySetUp');
             yield exec_1.exec('sudo chmod +x UnitySetUp');
-            let command = this.CreateInstallCommand(option);
-            return exec_1.exec(command);
+            const components = this.GetInstallComponents(option);
+            return exec_1.exec("./UnitySetUp", ["--unattended", '--install-location="/opt/Unity"', `--components="${components.join(",")}"`], { input: Buffer.from("y\n", "ascii") });
         });
     }
     ;
-    CreateInstallCommand(option) {
+    GetInstallComponents(option) {
         let command = 'echo y | ./UnitySetUp --unattended --install-location="/opt/Unity" --components="Unity';
+        const components = [];
         if (option["has-android"] === 'true') {
-            command += ',Android';
+            components.push("Android");
         }
         if (option["has-il2cpp"] === 'true') {
-            command += ',Linux-IL2CPP';
+            components.push("Linux-IL2CPP");
         }
         if (option["has-ios"] === 'true') {
-            command += ',iOS';
+            components.push("iOS");
         }
         if (option["has-mac-mono"] === 'true') {
-            command += ',Mac-Mono';
+            components.push("Mac-Mono");
         }
         if (option["has-webgl"] === 'true') {
-            command += ',WebGL';
+            components.push("WebGL");
         }
         if (option["has-windows-mono"] === 'true') {
-            command += ',Windows-Mono';
+            components.push("Windows-Mono");
         }
-        command += '"';
-        return command;
+        return components;
     }
     TryRestore(version) {
         return __awaiter(this, void 0, void 0, function* () {
