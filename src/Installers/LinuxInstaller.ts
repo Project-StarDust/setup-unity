@@ -41,45 +41,47 @@ export class LinuxInstaller implements Installer {
         }
     };
     private async InstallDependencies(): Promise<void> {
-        await exec('sudo apt-get update');
-        await exec('sudo apt-get -y install gconf-service');
-        await exec('sudo apt-get -y install lib32gcc1');
-        await exec('sudo apt-get -y install lib32stdc++6');
-        await exec('sudo apt-get -y install libasound2');
-        await exec('sudo apt-get -y install libc6');
-        await exec('sudo apt-get -y install libc6-i386');
-        await exec('sudo apt-get -y install libcairo2');
-        await exec('sudo apt-get -y install libcap2');
-        await exec('sudo apt-get -y install libcups2');
-        await exec('sudo apt-get -y install libdbus-1-3');
-        await exec('sudo apt-get -y install libexpat1');
-        await exec('sudo apt-get -y install libfontconfig1');
-        await exec('sudo apt-get -y install libfreetype6');
-        await exec('sudo apt-get -y install libgcc1');
-        await exec('sudo apt-get -y install libgconf-2-4');
-        await exec('sudo apt-get -y install libgdk-pixbuf2.0-0');
-        await exec('sudo apt-get -y install libgl1-mesa-glx');
-        await exec('sudo apt-get -y install libglib2.0-0');
-        await exec('sudo apt-get -y install libglu1-mesa');
-        await exec('sudo apt-get -y install libgtk2.0-0');
-        await exec('sudo apt-get -y install libnspr4');
-        await exec('sudo apt-get -y install libnss3');
-        await exec('sudo apt-get -y install libpango1.0-0');
-        await exec('sudo apt-get -y install libstdc++6');
-        await exec('sudo apt-get -y install libx11-6');
-        await exec('sudo apt-get -y install libxcomposite1');
-        await exec('sudo apt-get -y install libxcursor1');
-        await exec('sudo apt-get -y install libxdamage1');
-        await exec('sudo apt-get -y install libxext6');
-        await exec('sudo apt-get -y install libxfixes3');
-        await exec('sudo apt-get -y install libxi6');
-        await exec('sudo apt-get -y install libxrandr2');
-        await exec('sudo apt-get -y install libxrender1');
-        await exec('sudo apt-get -y install libxtst6');
-        await exec('sudo apt-get -y install zlib1g');
-        await exec('sudo apt-get -y install npm');
-        await exec('sudo apt-get -y install debconf');
-        //cp.execSync('sudo apt-get -y install libpq5');
+        await exec('sudo apt-get update')
+        const packages = [
+            "gconf-service",
+            "lib32gcc1",
+            "lib32stdc++6",
+            "libasound2",
+            "libc6",
+            "libc6-i386",
+            "libcairo2",
+            "libcap2",
+            "libcups2",
+            "libdbus-1-3",
+            "libexpat1",
+            "libfontconfig1",
+            "libfreetype6",
+            "libgcc1",
+            "libgconf-2-4",
+            "libgdk-pixbuf2.0-0",
+            "libgl1-mesa-glx",
+            "libglib2.0-0",
+            "libglu1-mesa",
+            "libgtk2.0-0",
+            "libnspr4",
+            "libnss3",
+            "libpango1.0-0",
+            "libstdc++6",
+            "libx11-6",
+            "libxcomposite1",
+            "libxcursor1",
+            "libxdamage1",
+            "libxext6",
+            "libxfixes3",
+            "libxi6",
+            "libxrandr2",
+            "libxrender1",
+            "libxtst6",
+            "zlib1g",
+            "npm",
+            "debconf",
+        ];
+        await exec(`sudo apt-get install -y ${packages.join(" ")}`);
     };
     private async Install(version: string, option: InstallOption) {
         const download_url: string = "https://beta.unity3d.com/download/" + GetId(version) + "/UnitySetup";

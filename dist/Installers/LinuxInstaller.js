@@ -61,44 +61,46 @@ class LinuxInstaller {
     InstallDependencies() {
         return __awaiter(this, void 0, void 0, function* () {
             yield exec_1.exec('sudo apt-get update');
-            yield exec_1.exec('sudo apt-get -y install gconf-service');
-            yield exec_1.exec('sudo apt-get -y install lib32gcc1');
-            yield exec_1.exec('sudo apt-get -y install lib32stdc++6');
-            yield exec_1.exec('sudo apt-get -y install libasound2');
-            yield exec_1.exec('sudo apt-get -y install libc6');
-            yield exec_1.exec('sudo apt-get -y install libc6-i386');
-            yield exec_1.exec('sudo apt-get -y install libcairo2');
-            yield exec_1.exec('sudo apt-get -y install libcap2');
-            yield exec_1.exec('sudo apt-get -y install libcups2');
-            yield exec_1.exec('sudo apt-get -y install libdbus-1-3');
-            yield exec_1.exec('sudo apt-get -y install libexpat1');
-            yield exec_1.exec('sudo apt-get -y install libfontconfig1');
-            yield exec_1.exec('sudo apt-get -y install libfreetype6');
-            yield exec_1.exec('sudo apt-get -y install libgcc1');
-            yield exec_1.exec('sudo apt-get -y install libgconf-2-4');
-            yield exec_1.exec('sudo apt-get -y install libgdk-pixbuf2.0-0');
-            yield exec_1.exec('sudo apt-get -y install libgl1-mesa-glx');
-            yield exec_1.exec('sudo apt-get -y install libglib2.0-0');
-            yield exec_1.exec('sudo apt-get -y install libglu1-mesa');
-            yield exec_1.exec('sudo apt-get -y install libgtk2.0-0');
-            yield exec_1.exec('sudo apt-get -y install libnspr4');
-            yield exec_1.exec('sudo apt-get -y install libnss3');
-            yield exec_1.exec('sudo apt-get -y install libpango1.0-0');
-            yield exec_1.exec('sudo apt-get -y install libstdc++6');
-            yield exec_1.exec('sudo apt-get -y install libx11-6');
-            yield exec_1.exec('sudo apt-get -y install libxcomposite1');
-            yield exec_1.exec('sudo apt-get -y install libxcursor1');
-            yield exec_1.exec('sudo apt-get -y install libxdamage1');
-            yield exec_1.exec('sudo apt-get -y install libxext6');
-            yield exec_1.exec('sudo apt-get -y install libxfixes3');
-            yield exec_1.exec('sudo apt-get -y install libxi6');
-            yield exec_1.exec('sudo apt-get -y install libxrandr2');
-            yield exec_1.exec('sudo apt-get -y install libxrender1');
-            yield exec_1.exec('sudo apt-get -y install libxtst6');
-            yield exec_1.exec('sudo apt-get -y install zlib1g');
-            yield exec_1.exec('sudo apt-get -y install npm');
-            yield exec_1.exec('sudo apt-get -y install debconf');
-            //cp.execSync('sudo apt-get -y install libpq5');
+            const packages = [
+                "gconf-service",
+                "lib32gcc1",
+                "lib32stdc++6",
+                "libasound2",
+                "libc6",
+                "libc6-i386",
+                "libcairo2",
+                "libcap2",
+                "libcups2",
+                "libdbus-1-3",
+                "libexpat1",
+                "libfontconfig1",
+                "libfreetype6",
+                "libgcc1",
+                "libgconf-2-4",
+                "libgdk-pixbuf2.0-0",
+                "libgl1-mesa-glx",
+                "libglib2.0-0",
+                "libglu1-mesa",
+                "libgtk2.0-0",
+                "libnspr4",
+                "libnss3",
+                "libpango1.0-0",
+                "libstdc++6",
+                "libx11-6",
+                "libxcomposite1",
+                "libxcursor1",
+                "libxdamage1",
+                "libxext6",
+                "libxfixes3",
+                "libxi6",
+                "libxrandr2",
+                "libxrender1",
+                "libxtst6",
+                "zlib1g",
+                "npm",
+                "debconf",
+            ];
+            yield exec_1.exec(`sudo apt-get install -y ${packages.join(" ")}`);
         });
     }
     ;
